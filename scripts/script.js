@@ -383,59 +383,8 @@ function resetEverythingNoResponse() {
     resetShowMessageWithResponse();
   });
 }
-searchPasswordsInput();
-function searchPasswordsInput() {
-  searchPasswordsInputElement.addEventListener("input", () => {
-    const searchPasswordsInputvalue =
-      searchPasswordsInputElement.value.toLowerCase();
-    FilterPasswords(searchPasswordsInputvalue);
-  });
-}
-function FilterPasswords(searchPasswordsInputvalue) {
-  if (searchPasswordsInputvalue === "") {
-    displayStoredPasswords();
-    return;
-  }
 
-  let filteredArray = storedPasswords.filter((password, number) => {
-    return password.toLowerCase().includes(searchPasswordsInputvalue);
-  });
-
-  displayFilteredPasswords(filteredArray);
-}
-function displayFilteredPasswords(filteredArray) {
-  let passwordsGridHTML = '<h1 style="height:50px;">Passwords:</h1>';
-  if (storedPasswords.length === 0) {
-    passwordsGridHTML += `
-        <p class="no-passwords-message">
-            No stored passwords
-        </p>`;
-  }
-  for (let i = 0; i < filteredArray.length; i++) {
-    passwordsGridHTML += `<div class="password-text-delete-button-container">
-            <div>
-                <p class="password-text">
-                ${i + 1}- ${filteredArray[i]}
-                </p>
-                </div>
-                <div class="copy-delete-buttons-container">
-                <button class="copy-password-button" 
-                data-copy-password-id="${i + 1}">
-                Copy Password
-                </button>
-                <button class="delete-password-button" 
-                data-delete-password-id="${i + 1}">
-                Delete Password
-                </button>
-                </div>
-            </div>`;
-  }
-
-  gridContainerELement.innerHTML = passwordsGridHTML;
+function enableTransition() {
+  document.documentElement.classList.add("enable-transition-body");
 }
 enableTransition();
-function enableTransition() {
-  window.addEventListener("load", () => {
-    document.documentElement.classList.add("enable-transition-body");
-  });
-}
